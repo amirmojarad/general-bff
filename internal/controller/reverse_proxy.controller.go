@@ -9,7 +9,7 @@ import (
 )
 
 type ReverseProxyConfig struct {
-	ReverseProxies []ServiceProxy
+	ServiceProxies []ServiceProxy
 }
 
 type ServiceProxy struct {
@@ -28,7 +28,7 @@ func NewReverseProxyConfig(servicesCfg *yml.ServicesConfig) (*ReverseProxyConfig
 	}
 
 	return &ReverseProxyConfig{
-		ReverseProxies: reverseProxies,
+		ServiceProxies: reverseProxies,
 	}, nil
 }
 

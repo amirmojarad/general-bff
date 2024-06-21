@@ -22,8 +22,18 @@ type Service struct {
 	Paths      []Path `yaml:"paths"`
 }
 
+type Prefix struct {
+	API   string `yaml:"api"`
+	APIBo string `yaml:"api-bo"`
+}
+
+type Middlewares struct {
+	Prefixes Prefix `yaml:"prefixes"`
+}
+
 type ServicesConfig struct {
-	Services []Service `yaml:"services"`
+	Services    []Service   `yaml:"services"`
+	Middlewares Middlewares `yaml:"middlewares"`
 }
 
 func NewServicesConfig(cfg *env.AppConfig) *ServicesConfig {
