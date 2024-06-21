@@ -37,11 +37,19 @@ func detectHttpMethod(path yml.Path) HttpMethod {
 		return HttpPatchMethod
 	}
 
+	if path.DELETE != nil {
+		return HttpDeleteMethod
+	}
+
 	return UnknownMethod
 }
 
 func (r ServiceProxy) createRoute(router *echo.Group, path yml.Path) {
 	method := detectHttpMethod(path)
+
+	if method == UnknownMethod {
+		return
+	}
 
 	if method == HttpGetMethod {
 		router.GET(*path.GET, r.Proxy)

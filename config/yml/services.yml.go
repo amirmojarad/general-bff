@@ -8,10 +8,11 @@ import (
 )
 
 type Path struct {
-	POST  *string `yaml:"POST,omitempty"`
-	GET   *string `yaml:"GET,omitempty"`
-	PATCH *string `yaml:"PATCH,omitempty"`
-	PUT   *string `yaml:"PUT,omitempty"`
+	POST   *string `yaml:"POST,omitempty"`
+	GET    *string `yaml:"GET,omitempty"`
+	PATCH  *string `yaml:"PATCH,omitempty"`
+	PUT    *string `yaml:"PUT,omitempty"`
+	DELETE *string `yaml:"DELETE,omitempty"`
 }
 
 type Service struct {
