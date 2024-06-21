@@ -31,6 +31,7 @@ func setupRouter(servicesCfg *yml.ServicesConfig) (*echo.Echo, error) {
 	}
 
 	router := echo.New()
+	controller.SetHealthCheck(router, controller.NewHealthCheck())
 
 	group := router.Group("/api")
 	controller.SetReverseProxyRoutes(group, reverseProxies.ReverseProxies)

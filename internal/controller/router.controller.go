@@ -7,3 +7,7 @@ func SetReverseProxyRoutes(router *echo.Group, reverseProxy []ServiceProxy) {
 		rp.toRequests(router)
 	}
 }
+
+func SetHealthCheck(router *echo.Echo, healthCheck *HealthCheck) {
+	router.GET("/health", healthCheck.Health)
+}
