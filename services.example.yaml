@@ -1,0 +1,14 @@
+version: 1.0
+
+middlewares:
+  prefixes:
+    api: "/api"
+
+services:
+  - name: [YOUR_SERVICE_NAME]
+    enabled: [true | false]
+    service_url: [YOUR_SERVICE_URL]
+    paths:
+      - GET: "/v1/products"
+      - GET: "/v1/product/:id"
+      - POST: "/v1/product"
