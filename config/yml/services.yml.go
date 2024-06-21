@@ -15,10 +15,10 @@ type Path struct {
 }
 
 type Service struct {
-	Name    string `yaml:"name"`
-	Enabled bool   `yaml:"enabled"`
-	BaseUrl string `yaml:"base_url"`
-	Paths   []Path `yaml:"paths"`
+	Name       string `yaml:"name"`
+	Enabled    bool   `yaml:"enabled"`
+	ServiceUrl string `yaml:"service_url"`
+	Paths      []Path `yaml:"paths"`
 }
 
 type ServicesConfig struct {
@@ -31,7 +31,7 @@ func NewServicesConfig(cfg *env.AppConfig) *ServicesConfig {
 }
 
 func read(path string) ServicesConfig {
-	data, err := os.ReadFile("services.yaml")
+	data, err := os.ReadFile(path)
 
 	var config ServicesConfig
 	err = yaml.Unmarshal(data, &config)

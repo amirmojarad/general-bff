@@ -1,9 +1,11 @@
 package server
 
 import (
+	"fmt"
 	"general-bff/config/env"
 	"general-bff/config/yml"
-	"log/slog"
+	"general-bff/internal/controller"
+	"github.com/labstack/echo/v4"
 )
 
 func Run() error {
@@ -12,7 +14,26 @@ func Run() error {
 		return err
 	}
 
-	services := yml.NewServicesConfig(cfg)
-	slog.Info(slog.Any("service-name", services.Services[0].Name).String())
-	return nil
+	servicesCfg := yml.NewServicesConfig(cfg)
+
+	router, err := setupRouter(servicesCfg)
+	if err != nil {
+		return err
+	}
+
+	return router.Start(fmt.Sprintf(":%d", cfg.App.Port))
+}
+
+func setupRouter(servicesCfg *yml.ServicesConfig) (*echo.Echo, error) {
+	reverseProxies, err := controller.NewReverseProxyConfig(servicesCfg)
+	if err != nil {
+		return nil, err
+	}
+
+	router := echo.New()
+
+	group := router.Group("/api")
+	controller.SetReverseProxyRoutes(group, reverseProxies.ReverseProxies)
+
+	return router, nil
 }

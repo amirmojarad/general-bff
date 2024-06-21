@@ -45,5 +45,5 @@ func setAppEnv(cfg *AppConfig) error {
 }
 
 func setServicesPath(cfg *AppConfig) {
-	cfg.Services.ServicesPath = os.Getenv("SERVICES_PATH")
+	cfg.Services.ServicesPath = os.Getenv("SERVICES_YAML_FILE_PATH")
 }
