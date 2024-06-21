@@ -28,4 +28,7 @@ services:
   - name: your service name
   - enabled: clear :)
   - service_url: base url of your service
-  - paths: your service paths and routes
+  - paths: your service paths and routes 
+
+
+asd
