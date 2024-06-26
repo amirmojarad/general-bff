@@ -17,7 +17,7 @@ type ServiceProxy struct {
 	svcUrl       string
 	reverseProxy *httputil.ReverseProxy
 	url          *url.URL
-	Proxy        func(ctx echo.Context) error
+	ProxyFn      func(ctx echo.Context) error
 	Paths        []yml.Path
 }
 
@@ -53,7 +53,7 @@ func getReverseProxies(servicesCfg *yml.ServicesConfig) ([]ServiceProxy, error) 
 
 		serviceProxy.url = svcURL
 		serviceProxy.reverseProxy = createReverseProxy(serviceProxy.url)
-		serviceProxy.Proxy = func(ctx echo.Context) error {
+		serviceProxy.ProxyFn = func(ctx echo.Context) error {
 			serviceProxy.reverseProxy.ServeHTTP(ctx.Response(), ctx.Request())
 
 			return nil

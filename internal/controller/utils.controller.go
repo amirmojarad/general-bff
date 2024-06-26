@@ -52,19 +52,23 @@ func (r ServiceProxy) createRoute(router *echo.Group, path yml.Path) {
 	}
 
 	if method == HttpGetMethod {
-		router.GET(*path.GET, r.Proxy)
+		router.GET(*path.GET, r.ProxyFn)
 	}
 
 	if method == HttpPostMethod {
-		router.POST(*path.POST, r.Proxy)
+		router.POST(*path.POST, r.ProxyFn)
 	}
 
 	if method == HttpPutMethod {
-		router.PUT(*path.PUT, r.Proxy)
+		router.PUT(*path.PUT, r.ProxyFn)
 	}
 
 	if method == HttpPatchMethod {
-		router.PATCH(*path.PATCH, r.Proxy)
+		router.PATCH(*path.PATCH, r.ProxyFn)
+	}
+
+	if method == HttpDeleteMethod {
+		router.DELETE(*path.DELETE, r.ProxyFn)
 	}
 }
 
